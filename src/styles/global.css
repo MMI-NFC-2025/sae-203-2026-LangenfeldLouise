@@ -2,6 +2,8 @@
 
 @theme {
     --color-bleu-ciel: oklch(64.03% 0.099 211.69);
+    --color-bleu-pas-ciel: oklch(60.41% 0.093 211.28);
+    --color-bleu-vert: oklch(40.26% 0.061 211.19);
 }
 
 :root {

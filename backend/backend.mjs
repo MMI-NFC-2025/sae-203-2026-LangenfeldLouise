@@ -80,3 +80,17 @@ export async function getArtisteById(id) {
     const record = await pb.collection("artiste").getOne(id);
     return record;
 }
+
+export function formatSceneDate(dateValue) {
+    if (!dateValue) return "Date inconnue";
+
+    const date = new Date(dateValue);
+
+    if (isNaN(date.getTime())) return "Date invalide";
+
+    return date.toLocaleDateString("fr-FR", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric"
+    });
+}

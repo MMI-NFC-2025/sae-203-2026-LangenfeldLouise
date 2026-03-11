@@ -1,11 +1,11 @@
 ---
-// index.astro - Page d'accueil
 import Layout from "../layouts/Layout.astro";
-import Hero from "../components/Hero.astro";
 import Card from "../components/Card.astro";
-import { AllArtiste } from "../../backend/backend.mjs";
-const artiste = await AllArtiste();
+import { AllArtiste, getImageUrl } from "../../backend/backend.mjs";
 
+const artistes = await AllArtiste();
+
+// Images partenaires → doivent être dans /public/assets/img/partners/
 const partners = [
     {
         image: "/assets/img/partners/img_montbeliard-ville.avif",
@@ -60,8 +60,28 @@ const infos = [
 
 <Layout title="Fanfa'Contoise - Accueil">
     <!-- Section Héro -->
-    <Hero />
+    <!-- Contenu -->
+    <div class="relative z-10 flex flex-col items-center gap-8 md:gap-12">
+        <!-- Titre principal -->
+        <h1
+            class="font-title font-bold text-2xl sm:text-3xl md:text-5xl lg:text-6xl text-center text-white max-w-3xl leading-tight"
+        >
+            Au centre-ville de Montbéliard
+        </h1>
 
+        <!-- CTA Billetterie -->
+        <a
+            href="#"
+            class="cta inline-flex items-center gap-2 text-sm md:text-lg font-bold"
+        >
+            <span>Accéder à la billetterie</span>
+            <img
+                src="/assets/icons/arrow/icon_cta_billet.svg"
+                alt=""
+                class="w-4 h-4 md:w-5 md:h-5"
+            />
+        </a>
+    </div>
     <!-- Section Aperçu de la Prog -->
     <section id="section-prog" class="bg-primary-blue py-8 md:py-12 lg:py-16">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
@@ -76,12 +96,11 @@ const infos = [
                 class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6 mb-8 md:mb-10"
             >
                 {
-                    artiste.map((artiste) => (
+                    artistes.map((artiste) => (
                         <Card
-                            image={artiste.photo_principale}
-                            name={artiste.nom}
-                            date={artiste.date_representation}
-                            href={artiste.href}
+                            image={getImageUrl(artiste, "photo_principale")}
+                            name={artiste.nom_artiste}
+                            href={`/artiste/${artiste.id}`}
                         />
                     ))
                 }
@@ -113,7 +132,6 @@ const infos = [
                 Nos partenaires
             </h2>
 
-            <!-- Grille de partenaires -->
             <div
                 class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-5 md:gap-6 items-center"
             >
@@ -141,10 +159,9 @@ const infos = [
                 Informations Pratiques
             </h2>
 
-            <!-- Liste accordéon -->
             <div class="space-y-3 md:space-y-4">
                 {
-                    infos.map((info, index) => (
+                    infos.map((info) => (
                         <details class="group border-b-2 border-detail pb-3 md:pb-4">
                             <summary class="flex items-center justify-between cursor-pointer py-2">
                                 <span class="font-title font-bold text-base sm:text-lg md:text-xl text-white group-open:text-detail transition-colors">

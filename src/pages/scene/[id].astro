@@ -1,105 +1,108 @@
 ---
-// src/pages/scene/[id].astro - Page détail d'une scène
 import Layout from "../../layouts/Layout.astro";
-import { AllSceneNom } from "../../../backend/backend.mjs";
-const scene = await AllSceneNom();
+import {
+    ArtisteIdScene,
+    InfoScene,
+    getImageUrl,
+    formatSceneDate,
+} from "../../../backend/backend.mjs";
 
-export async function getStaticPaths() {
-    return Object.keys(scene).map((id) => ({
-        params: { id },
-        props: { scene: scene[id] },
-    }));
+const id = Astro.params.id ?? "";
+const scene = await InfoScene(id);
+
+if (!scene) {
+    return Astro.redirect("/404");
 }
 
-interface Props {
-    scene: (typeof scene)[keyof typeof scene];
-}
+const artists = await ArtisteIdScene(id);
+const sceneImage = getImageUrl(scene, "photo");
 
-const { id } = Astro.params;
-const scenes = Astro.props.scene;
+const sceneName = scene.nom_scene ?? "Scène";
+const sceneDescription = scene.description ?? "Description indisponible.";
 
-if (!scenes) {
-    return Astro.response.write("Scène non trouvée");
-}
+const lineupArtists = artists.map((artist) => ({
+    id: artist.id,
+    name: artist.nom_artiste ?? "Artiste",
+    date: formatSceneDate(artist.date_representation),
+}));
 ---
 
-<Layout title={`${scenes.nom_scene} - Fanfa'Contoise`}>
-    <!-- Section en-tête -->
-    <section class="bg-primary-blue py-8 md:py-12 lg:py-16">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
-            <a
-                href="/scene"
-                class="inline-flex items-center gap-2 text-detail hover:text-white transition-colors mb-4 md:mb-6 text-sm md:text-base"
+<Layout title={`${sceneName}`} description="Détail scène">
+    <main class="scene-page-wrap">
+        <section class="section section--wrapper scene-page">
+            <button
+                class="scene-pageback-btn"
+                type="button"
+                onclick="window.history.back()"
             >
-                <img
-                    src="/assets/icons/arrow/icon_flecheG.svg"
-                    alt="retour"
-                    class="w-4 h-4 md:w-5 md:h-5"
-                />
-                <span>Retour</span>
-            </a>
-            <h1
-                class="font-title font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl"
-            >
-                {scenes.nom_scene}
-            </h1>
-        </div>
-    </section>
+                <span aria-hidden="true">←</span>
+                <span class="u-sr-only">Retour aux scènes</span>
+            </button>
 
-    <!-- Section description -->
-    <section class="bg-primary-blue py-8 md:py-12 lg:py-16">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
-            <div
-                class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-start"
-            >
-                <!-- Image -->
-                <div class="flex justify-center">
+            <header class="scene-pageheader">
+                <h1
+                    class="scene-pagetitle font-title font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center mb-3 md:mb-4"
+                >
+                    {sceneName}
+                </h1>
+            </header>
+
+            {
+                sceneImage ? (
                     <img
-                        src={scenes.photo}
-                        alt={scenes.nom_scene}
-                        class="rounded-2xl max-w-sm md:max-w-md w-full h-auto object-cover shadow-xl"
+                        class="w-full mx-0 lg:w-[calc(100%-550px)] lg:mx-auto lg:rounded-2xl"
+                        src={sceneImage}
+                        alt={`Photo de ${sceneName}`}
+                        loading="lazy"
                     />
-                </div>
+                ) : (
+                    <div class="scene-pageimg">Aucune image disponible</div>
+                )
+            }
 
-                <!-- Contenu -->
-                <div class="space-y-4 md:space-y-6">
-                    <div>
-                        <h2
-                            class="font-title font-bold text-lg md:text-xl lg:text-2xl text-white mb-2"
-                        >
-                            À propos
-                        </h2>
-                        <p
-                            class="text-white text-sm md:text-base leading-relaxed"
-                        >
-                            {scenes.description}
-                        </p>
-                    </div>
+            <div class="grid grid-cols-9 scene-pagepanels">
+                <p class="scene-pagetext col-start-2 col-end-9">
+                    {sceneDescription}
+                </p>
 
-                    <div>
-                        <h3
-                            class="font-title font-bold text-detail text-sm md:text-base lg:text-lg mb-2"
-                        >
-                            Capacité
-                        </h3>
-                        <p class="text-white text-sm md:text-base">
-                            {scenes.capacite}
-                        </p>
-                    </div>
+                <h2
+                    class="scene-pagetitle font-title font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center mb-3 md:mb-4 col-start-4 col-end-7"
+                >
+                    Artistes programmés :
+                </h2>
 
-                    <a
-                        href="#"
-                        class="cta inline-flex items-center gap-2 text-sm md:text-base lg:text-lg"
-                    >
-                        <span>Découvrir les artistes</span>
-                        <img
-                            src="/assets/icons/arrow/icon_cta_billet.svg"
-                            alt=""
-                            class="w-4 h-4 md:w-5 md:h-5"
-                        />
-                    </a>
-                </div>
+                <section class="scene-pagelineup col-start-4 col-end-7 lg:col-start-5 lg:col-end-5">
+                    <ul class="scene-artists u-list-unstyled">
+                        {
+                            lineupArtists.length === 0 ? (
+                                <li class="scene-artistsitem">
+                                    Aucun artiste programmé.
+                                </li>
+                            ) : (
+                                lineupArtists.map((artist) => (
+                                    <li class="scene-artistsitem">
+                                        <a
+                                            class="scene-pageartist-link"
+                                            href={`/artistes/${artist.id}`}
+                                        >
+                                            {artist.name} — {artist.date}
+                                        </a>
+                                    </li>
+                                ))
+                            )
+                        }
+                    </ul>
+                </section>
             </div>
-        </div>
-    </section>
+
+            <div class="grid grid-cols-9 scene-pageactions">
+                <a
+                    class="btn scene-pagecta col-start-4 col-end-7 text-center"
+                    href="/artistes"
+                >
+                    Voir tous les Artistes
+                </a>
+            </div>
+        </section>
+    </main>
 </Layout>
