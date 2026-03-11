@@ -6,7 +6,6 @@ const artistes = await AllArtiste();
 ---
 
 <Layout title="Les Artistes - Fanfa'Contoise">
-    <!-- Section héro -->
     <section class="bg-primary-blue py-8 md:py-12 lg:py-16">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
             <h1
@@ -22,9 +21,7 @@ const artistes = await AllArtiste();
         </div>
     </section>
 
-    <!-- Section liste des artistes -->
     <section class="bg-primary-blue py-8 md:py-12 lg:py-16">
-        <!-- Filtres -->
         <div class="flex justify-center gap-4 mb-8">
             <button
                 data-filter="2026-06-26"
@@ -59,7 +56,6 @@ const artistes = await AllArtiste();
                 La liste des artistes
             </h2>
 
-            <!-- Grille d'artistes -->
             <div
                 class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6"
                 id="artist-grid"

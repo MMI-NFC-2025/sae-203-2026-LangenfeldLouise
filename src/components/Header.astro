@@ -3,9 +3,7 @@ import "../styles/global.css";
 ---
 <header class="sticky top-0 h-auto z-50 bg-bleu-ciel shadow-md">
     <nav class="mx-4 md:mx-8 relative">
-        <!-- Barre supérieure avec boutons -->
         <div class="flex justify-between items-center py-3 md:py-4">
-            <!-- Boutons réseaux gauche -->
             <div class="flex gap-1">
                 <a
                     href="https://www.instagram.com"
@@ -39,7 +37,6 @@ import "../styles/global.css";
                 </a>
             </div>
 
-            <!-- Logo centré -->
             <a href="/" class="absolute left-1/2 transform -translate-x-1/2">
                 <img
                     src="/assets/icons/icon_logo.svg"
@@ -48,7 +45,6 @@ import "../styles/global.css";
                 />
             </a>
 
-            <!-- Boutons droite (ticket + menu) -->
             <div class="flex gap-1">
                 <a
                     href=""
@@ -76,7 +72,6 @@ import "../styles/global.css";
             </div>
         </div>
 
-        <!-- Menu de navigation (caché par défaut) -->
         <nav
             id="mainNav"
             class="hidden absolutebg-bleu-pas-ciel left-0 right-0 top-20 md:top-24 bg-primary-blue border-t-4 border-detail flex-col gap-4 md:gap-6 py-6 md:py-8 px-4 md:px-8 max-h-screen overflow-y-auto"
@@ -142,7 +137,6 @@ import "../styles/global.css";
 </header>
 
 <script>
-    // Gestion du menu mobile
     const menuToggle = document.getElementById("menuToggle");
     const mainNav = document.getElementById("mainNav");
 
@@ -155,7 +149,6 @@ import "../styles/global.css";
             mainNav.classList.toggle("hidden");
         });
 
-        // Fermer le menu quand on clique sur un lien
         const menuLinks = mainNav.querySelectorAll("a");
         menuLinks.forEach((link) => {
             link.addEventListener("click", () => {

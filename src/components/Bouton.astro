@@ -1,9 +1,4 @@
 ---
-// Button.astro - Composant bouton réutilisable
-// Variantes: primary (detail bg), secondary (border), ghost (text only)
-// Sizes: sm, md (default), lg
-// Props: href, target, type, variant, size, class, icon, iconAlt
-
 interface Props {
     href?: string;
     target?: string;
@@ -28,11 +23,9 @@ const {
     class: className = "",
 } = Astro.props;
 
-// Classes de base
 const baseClasses =
     "inline-flex items-center gap-2 font-title font-bold transition-all rounded-full";
 
-// Variantes
 const variantClasses = {
     primary: "bg-detail text-primary-blue hover:opacity-90",
     secondary:
@@ -40,7 +33,6 @@ const variantClasses = {
     ghost: "text-detail hover:text-white",
 };
 
-// Tailles
 const sizeClasses = {
     sm: "px-3 py-1.5 text-sm",
     md: "px-6 py-3 text-base",

@@ -1,5 +1,4 @@
 ---
-// src/pages/faq/index.astro - Page FAQ
 import Layout from "../layouts/Layout.astro";
 
 const faqs = [
@@ -32,7 +31,6 @@ const faqs = [
 ---
 
 <Layout title="FAQ - Fanfa'Contoise">
-    <!-- Section héro -->
     <section class="bg-primary-blue py-8 md:py-12 lg:py-16">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
             <h1
@@ -49,7 +47,6 @@ const faqs = [
         </div>
     </section>
 
-    <!-- Section questions -->
     <section class="bg-primary-blue py-8 md:py-12 lg:py-16">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 md:px-8">
             <h2
@@ -58,7 +55,6 @@ const faqs = [
                 Les Questions
             </h2>
 
-            <!-- Accordéons -->
             <div class="space-y-3 md:space-y-4">
                 {
                     faqs.map((faq, index) => (
@@ -83,7 +79,6 @@ const faqs = [
                 }
             </div>
 
-            <!-- Section contact -->
             <div class="mt-8 md:mt-12 pt-6 md:pt-8 border-t border-detail">
                 <div class="text-center">
                     <p class="text-white mb-4 text-sm md:text-base">

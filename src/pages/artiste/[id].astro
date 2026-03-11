@@ -53,7 +53,6 @@ const metaItems = [
 
 <Layout title={`${artisteName}`} description="Détail artiste">
     <main class="artist-page">
-        <!-- HERO -->
         <section class="artist-page__hero">
             <button
                 class="artist-page__back-btn"
@@ -87,7 +86,6 @@ const metaItems = [
             }
         </section>
 
-        <!-- INFOS -->
         <section class="grid grid-cols-9 section section--wrapper artist-page__info">
             <p class="col-start-4 col-end-8 artist-page__meta artist-page__meta--mobile lg:col-start-5">
                 <span class="artist-page__date">{concertDate}</span><br />
@@ -112,7 +110,6 @@ const metaItems = [
             <p class="artist-page__bio col-start-6 col-span-3">{bioText}</p>
         </section>
 
-        <!-- GALERIE / CARROUSEL -->
         <section class="section section--wrapper artist-page__gallery text-center">
             <h2 class="col-start-5 artist-page__gallery-title">Galerie</h2>
 
@@ -140,7 +137,6 @@ const metaItems = [
             }
         </section>
 
-        <!-- CTA -->
         <section class="grid grid-cols-9 section section--wrapper artist-page__cta">
             <a class="col-start-4 col-span-4 lg:col-start-5 btn artist-page__program-btn" href="/programme">
                 Voir le programme complet
