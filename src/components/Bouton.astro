@@ -1,0 +1,59 @@
+---
+// Button.astro - Composant bouton réutilisable
+// Variantes: primary (detail bg), secondary (border), ghost (text only)
+// Sizes: sm, md (default), lg
+// Props: href, target, type, variant, size, class, icon, iconAlt
+
+interface Props {
+    href?: string;
+    target?: string;
+    type?: "button" | "submit" | "reset";
+    variant?: "primary" | "secondary" | "ghost";
+    size?: "sm" | "md" | "lg";
+    icon?: string;
+    iconAlt?: string;
+    disabled?: boolean;
+    class?: string;
+}
+
+const {
+    href,
+    target = "_self",
+    type = "button",
+    variant = "primary",
+    size = "md",
+    icon,
+    iconAlt = "",
+    disabled = false,
+    class: className = "",
+} = Astro.props;
+
+// Classes de base
+const baseClasses =
+    "inline-flex items-center gap-2 font-title font-bold transition-all rounded-full";
+
+// Variantes
+const variantClasses = {
+    primary: "bg-detail text-primary-blue hover:opacity-90",
+    secondary:
+        "border-2 border-detail text-detail hover:bg-detail hover:text-primary-blue",
+    ghost: "text-detail hover:text-white",
+};
+
+// Tailles
+const sizeClasses = {
+    sm: "px-3 py-1.5 text-sm",
+    md: "px-6 py-3 text-base",
+    lg: "px-8 py-4 text-lg",
+};
+
+const buttonClasses = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className} ${disabled ? "opacity-50 cursor-not-allowed" : ""}`;
+
+const Element = href ? "a" : "button";
+const elementProps = href ? { href, target } : { type, disabled };
+---
+
+<Element {...elementProps} class={buttonClasses}>
+    <slot />
+    {icon && <img src={icon} alt={iconAlt} class="w-5 h-5" />}
+</Element>

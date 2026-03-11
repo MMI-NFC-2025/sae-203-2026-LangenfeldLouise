@@ -1,0 +1,53 @@
+---
+import "../styles/global.css";
+---
+
+<section
+    class="relative min-h-screen md:h-screen flex flex-col items-center justify-center bg-primary-blue overflow-hidden px-4 py-12 md:py-0"
+>
+    <!-- Décoration confetti -->
+    <img
+        src="../assets/img/hero/img_confetti.avif"
+        alt="confetti"
+        class="absolute inset-0 w-full h-full object-cover opacity-20 md:opacity-30"
+    />
+
+    <!-- Contenu -->
+    <div class="relative z-10 flex flex-col items-center gap-8 md:gap-12">
+        <!-- Titre principal -->
+        <h1
+            class="font-title font-bold text-2xl sm:text-3xl md:text-5xl lg:text-6xl text-center text-white max-w-3xl leading-tight"
+        >
+            Au centre-ville de Montbéliard
+        </h1>
+
+        <!-- CTA Billetterie -->
+        <a
+            href="#"
+            class="cta inline-flex items-center gap-2 text-sm md:text-lg font-bold"
+        >
+            <span>Accéder à la billetterie</span>
+            <img
+                src="/assets/icons/arrow/icon_cta_billet.svg"
+                alt=""
+                class="w-4 h-4 md:w-5 md:h-5"
+            />
+        </a>
+    </div>
+
+    <!-- Swipe indication -->
+    <div
+        class="absolute bottom-4 md:bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce"
+    >
+        <h2
+            class="font-special text-l md:text-base text-white text-center px-2"
+        >
+            Découvrez les premières infos !
+        </h2>
+        <a
+            href="#section-prog"
+            class="text-white hover:text-detail transition-colors">
+        </a>
+    </div>
+</section>
+

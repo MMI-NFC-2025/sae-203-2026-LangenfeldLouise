@@ -1,10 +1,168 @@
 ---
-import Layout from '../layouts/Layout.astro';
+// index.astro - Page d'accueil
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import Card from "../components/Card.astro";
+import { AllArtiste } from "../../backend/backend.mjs";
+const artiste = await AllArtiste();
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const partners = [
+    {
+        image: "/assets/img/partners/img_montbeliard-ville.avif",
+        alt: "Ville de Montbéliard",
+    },
+    { image: "/assets/img/partners/img_pma.avif", alt: "PMA" },
+    {
+        image: "/assets/img/partners/img_sochaux.avif",
+        alt: "FC Sochaux Montbéliard",
+    },
+    {
+        image: "/assets/img/partners/img_est-rep.avif",
+        alt: "Région Bourgogne-Franche-Comté",
+    },
+    {
+        image: "/assets/img/partners/img_cnm.avif",
+        alt: "Centre National de la Musique",
+    },
+    { image: "/assets/img/partners/img_est-rep.avif", alt: "Est Républicain" },
+    { image: "/assets/img/partners/img_france3.avif", alt: "France 3 BFC" },
+    {
+        image: "/assets/img/partners/img_univ.avif",
+        alt: "Université Franche-Comté",
+    },
+    { image: "/assets/img/partners/img_spotify.avif", alt: "Spotify" },
+    { image: "/assets/img/partners/img_evolity.avif", alt: "Evolity" },
+];
+
+const infos = [
+    {
+        title: "Nos Tarifs",
+        content:
+            "Gratuit comme l'air : pas besoin de portefeuille pour entrer !",
+    },
+    {
+        title: "Les Hébergements",
+        content:
+            "Pas de lieu pour dormir, juste pour danser. Organisez votre retour !",
+    },
+    {
+        title: "Les Transports",
+        content:
+            "Transport easy : une navette spéciale s'ajoute au réseau Évolity pour l'occasion !",
+    },
+    {
+        title: "FAQ",
+        content:
+            "FAQ : tout ce qu'il faut savoir en un clin d'œil. Accédez aux questions-réponses ICI",
+    },
+];
 ---
 
-<Layout>
-	<h1>Welcome to Astro!</h1>
+<Layout title="Fanfa'Contoise - Accueil">
+    <!-- Section Héro -->
+    <Hero />
+
+    <!-- Section Aperçu de la Prog -->
+    <section id="section-prog" class="bg-primary-blue py-8 md:py-12 lg:py-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
+            <h2
+                class="font-title font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center mb-8 md:mb-12 text-detail"
+            >
+                Aperçu de la Prog'
+            </h2>
+
+            <!-- Grille de cartes -->
+            <div
+                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6 mb-8 md:mb-10"
+            >
+                {
+                    artiste.map((artiste) => (
+                        <Card
+                            image={artiste.photo_principale}
+                            name={artiste.nom}
+                            date={artiste.date_representation}
+                            href={artiste.href}
+                        />
+                    ))
+                }
+            </div>
+
+            <!-- CTA Voir plus -->
+            <div class="flex justify-center">
+                <a
+                    href="#"
+                    class="cta inline-flex items-center gap-2 text-sm sm:text-base md:text-lg font-bold"
+                >
+                    <span>Accéder à la billetterie</span>
+                    <img
+                        src="/assets/icons/arrow/icon_cta_billet.svg"
+                        alt=""
+                        class="w-4 h-4 md:w-5 md:h-5"
+                    />
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Nos partenaires -->
+    <section class="bg-primary-blue py-8 md:py-12 lg:py-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
+            <h2
+                class="font-title font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center mb-8 md:mb-12 text-detail"
+            >
+                Nos partenaires
+            </h2>
+
+            <!-- Grille de partenaires -->
+            <div
+                class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-5 md:gap-6 items-center"
+            >
+                {
+                    partners.map((partner) => (
+                        <div class="flex justify-center">
+                            <img
+                                src={partner.image}
+                                alt={partner.alt}
+                                class="h-12 sm:h-14 md:h-16 lg:h-20 w-auto hover:scale-110 transition-transform duration-300"
+                            />
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Informations Pratiques -->
+    <section class="bg-primary-blue py-8 md:py-12 lg:py-16">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 md:px-8">
+            <h2
+                class="font-title font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center mb-8 md:mb-12 text-detail"
+            >
+                Informations Pratiques
+            </h2>
+
+            <!-- Liste accordéon -->
+            <div class="space-y-3 md:space-y-4">
+                {
+                    infos.map((info, index) => (
+                        <details class="group border-b-2 border-detail pb-3 md:pb-4">
+                            <summary class="flex items-center justify-between cursor-pointer py-2">
+                                <span class="font-title font-bold text-base sm:text-lg md:text-xl text-white group-open:text-detail transition-colors">
+                                    {info.title}
+                                </span>
+                                <img
+                                    src="/assets/icons/arrow/icon_flecheD.svg"
+                                    alt=""
+                                    class="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-open:rotate-180"
+                                />
+                            </summary>
+                            <p class="pt-3 md:pt-4 text-sm md:text-base text-white leading-relaxed">
+                                {info.content}
+                            </p>
+                        </details>
+                    ))
+                }
+            </div>
+        </div>
+    </section>
 </Layout>

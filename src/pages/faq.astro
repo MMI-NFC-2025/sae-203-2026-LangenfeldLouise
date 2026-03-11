@@ -1,0 +1,107 @@
+---
+// src/pages/faq/index.astro - Page FAQ
+import Layout from "../layouts/Layout.astro";
+
+const faqs = [
+    {
+        question: "Faut-il des places pour accéder au festival ?",
+        answer: "Oui, même si le festival est entièrement gratuit, un billet reste obligatoire pour accéder au site. Vous pouvez réserver vos places gratuitement sur la billetterie en ligne et recevoir votre billet par e-mail.",
+    },
+    {
+        question: "Y a-t-il une billetterie sur place ?",
+        answer: "Selon les disponibilités, une billetterie sera également proposée à l'entrée du festival.",
+    },
+    {
+        question:
+            "Le festival est-il accessible aux personnes à mobilité réduite ?",
+        answer: "Oui, le festival est accessible aux personnes à mobilité réduite. Des zones adaptées, des voies d'accès réservées et des sanitaires accessibles sont prévus. N'hésitez pas à nous contacter si vous avez des besoins spécifiques.",
+    },
+    {
+        question: "Un parking est-il disponible ?",
+        answer: "Oui, un parking est mis à disposition des festivaliers à proximité du site. Les places sont limitées : nous encourageons le covoiturage et les transports en commun lorsque cela est possible.",
+    },
+    {
+        question: "Les animaux sont-ils autorisés ?",
+        answer: "Oui, les animaux sont autorisés sur le site du festival, à condition qu'ils soient tenus en laisse et restent sous la responsabilité de leur propriétaire. Nous vous recommandons également de veiller à leur confort, surtout en cas de forte affluence ou de chaleur.",
+    },
+    {
+        question: "Comment devenir bénévole ?",
+        answer: "Si vous souhaitez participer en tant que bénévole, n'hésitez pas à nous écrire via la page contact de notre site. Nous accueillons toujours avec enthousiasme les personnes motivées par le projet !",
+    },
+];
+---
+
+<Layout title="FAQ - Fanfa'Contoise">
+    <!-- Section héro -->
+    <section class="bg-primary-blue py-8 md:py-12 lg:py-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
+            <h1
+                class="font-title font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center mb-3 md:mb-4"
+            >
+                FAQ
+            </h1>
+            <p
+                class="text-center text-sm sm:text-base md:text-lg text-detail font-special"
+            >
+                Avant de nous contacter, consultez la FAQ : elle répond
+                peut-être à votre question.
+            </p>
+        </div>
+    </section>
+
+    <!-- Section questions -->
+    <section class="bg-primary-blue py-8 md:py-12 lg:py-16">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 md:px-8">
+            <h2
+                class="font-title font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl text-center mb-8 md:mb-12 text-detail"
+            >
+                Les Questions
+            </h2>
+
+            <!-- Accordéons -->
+            <div class="space-y-3 md:space-y-4">
+                {
+                    faqs.map((faq, index) => (
+                        <details class="group border-2 border-detail rounded-lg overflow-hidden">
+                            <summary class="flex items-center justify-between cursor-pointer p-4 md:p-6 bg-white bg-opacity-5 hover:bg-opacity-10 transition-all group-open:bg-detail group-open:text-primary-blue">
+                                <h3 class="font-title font-bold text-sm md:text-base lg:text-lg text-blue-400 group-open:text-primary-blue transition-colors">
+                                    {faq.question}
+                                </h3>
+                                <img
+                                    src="/assets/icons/arrow/icon_flecheD.svg"
+                                    alt=""
+                                    class="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-open:rotate-180 group-open:brightness-0 shrink-0 ml-2"
+                                />
+                            </summary>
+                            <div class="px-4 md:px-6 py-3 md:py-4 bg-white bg-opacity-5">
+                                <p class="text-blue-500 text-sm md:text-base leading-relaxed">
+                                    {faq.answer}
+                                </p>
+                            </div>
+                        </details>
+                    ))
+                }
+            </div>
+
+            <!-- Section contact -->
+            <div class="mt-8 md:mt-12 pt-6 md:pt-8 border-t border-detail">
+                <div class="text-center">
+                    <p class="text-white mb-4 text-sm md:text-base">
+                        Vous n'avez pas trouvé votre réponse ?
+                    </p>
+                    <a
+                        href="/contact"
+                        class="cta inline-flex items-center gap-2 text-sm sm:text-base md:text-lg"
+                    >
+                        <span>Nous contacter</span>
+                        <img
+                            src="/assets/icons/arrow/icon_cta_billet.svg"
+                            alt=""
+                            class="w-4 h-4 md:w-5 md:h-5"
+                        />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</Layout>

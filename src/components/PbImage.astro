@@ -1,0 +1,14 @@
+---
+import { pb } from "../../backend/backend.mjs";
+import { getImageUrl } from "../../backend/backend.mjs";
+import Image from "astro/components/Image.astro";
+const { record, field, alt, classImg } = Astro.props;
+
+const imageUrl = record ? pb.files.getURL(record, record[field]) : null;
+---
+
+{
+    imageUrl && (
+        <img class={classImg} src={imageUrl} alt={alt || "photo_principale"} />
+    )
+}

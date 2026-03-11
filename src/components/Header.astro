@@ -1,0 +1,168 @@
+---
+import "../styles/global.css";
+---
+<header class="sticky top-0 h-auto z-50 bg-bleu-ciel shadow-md">
+    <nav class="mx-4 md:mx-8 relative">
+        <!-- Barre supérieure avec boutons -->
+        <div class="flex justify-between items-center py-3 md:py-4">
+            <!-- Boutons réseaux gauche -->
+            <div class="flex gap-1">
+                <a
+                    href="https://www.instagram.com"
+                    class="p-1.5 md:p-2 hover:opacity-80 transition-opacity"
+                >
+                    <img
+                        src="/assets/icons/reseaux/icon_insta.svg"
+                        alt="Instagram"
+                        class="w-5 h-5 md:w-6 md:h-6"
+                    />
+                </a>
+                <a
+                    href="https://www.facebook.com"
+                    class="p-1.5 md:p-2 hover:opacity-80 transition-opacity"
+                >
+                    <img
+                        src="/assets/icons/reseaux/icon_facebook.svg"
+                        alt="Facebook"
+                        class="w-5 h-5 md:w-6 md:h-6"
+                    />
+                </a>
+                <a
+                    href="https://www.tiktok.com"
+                    class="p-1.5 md:p-2 hover:opacity-80 transition-opacity"
+                >
+                    <img
+                        src="/assets/icons/reseaux/icon_tiktok.svg"
+                        alt="TikTok"
+                        class="w-5 h-5 md:w-6 md:h-6"
+                    />
+                </a>
+            </div>
+
+            <!-- Logo centré -->
+            <a href="/" class="absolute left-1/2 transform -translate-x-1/2">
+                <img
+                    src="/assets/icons/icon_logo.svg"
+                    alt="Fanfa'Contoise"
+                    class="h-10 md:h-12 w-auto"
+                />
+            </a>
+
+            <!-- Boutons droite (ticket + menu) -->
+            <div class="flex gap-1">
+                <a
+                    href=""
+                    class="p-1.5 md:p-2 hover:opacity-80 transition-opacity"
+                >
+                    <img
+                        src="/assets/icons/reseaux/icon_ticket.svg"
+                        alt="Ticket"
+                        class="w-5 h-5 md:w-6 md:h-6"
+                    />
+                </a>
+                <button
+                    id="menuToggle"
+                    class="p-1.5 md:p-2 hover:opacity-80 transition-opacity"
+                    aria-label="Ouvrir le menu"
+                    aria-expanded="false"
+                    aria-controls="mainNav"
+                >
+                    <img
+                        src="/assets/icons/icon_menu.svg"
+                        alt="Menu"
+                        class="w-5 h-5 md:w-6 md:h-6"
+                    />
+                </button>
+            </div>
+        </div>
+
+        <!-- Menu de navigation (caché par défaut) -->
+        <nav
+            id="mainNav"
+            class="hidden absolute bg-blue-400 left-0 right-0 top-20 md:top-24 bg-primary-blue border-t-4 border-detail flex-col gap-4 md:gap-6 py-6 md:py-8 px-4 md:px-8 max-h-screen overflow-y-auto"
+            aria-hidden="true"
+        >
+            <ul class="flex flex-col gap-3 md:gap-4">
+                <li>
+                    <a
+                        href="/about"
+                        class="font-title text-base md:text-lg font-bold hover:text-detail transition-colors"
+                    >
+                        Notre Festival
+                    </a>
+                </li>
+                <li>
+                    <a
+                        href="/programme"
+                        class="font-title text-base md:text-lg font-bold hover:text-detail transition-colors"
+                    >
+                        Le Programme
+                    </a>
+                </li>
+                <li>
+                    <a
+                        href="/artiste"
+                        class="font-title text-base md:text-lg font-bold hover:text-detail transition-colors"
+                    >
+                        Les Artistes
+                    </a>
+                </li>
+                <li>
+                    <a
+                        href="/scene"
+                        class="font-title text-base md:text-lg font-bold hover:text-detail transition-colors"
+                    >
+                        Les Scènes
+                    </a>
+                </li>
+                <li>
+                    <a
+                        href="/contact"
+                        class="font-title text-base md:text-lg font-bold hover:text-detail transition-colors"
+                    >
+                        Nous Contacter
+                    </a>
+                </li>
+                <li>
+                    <a
+                        href="/faq"
+                        class="font-title text-base md:text-lg font-bold hover:text-detail transition-colors"
+                    >
+                        FAQ
+                    </a>
+                </li>
+            </ul>
+            <img
+                src="/assets/icon_logo.svg"
+                alt="Fanfa'Contoise"
+                class="h-10 md:h-12 w-auto mt-4"
+            />
+        </nav>
+    </nav>
+</header>
+
+<script>
+    // Gestion du menu mobile
+    const menuToggle = document.getElementById("menuToggle");
+    const mainNav = document.getElementById("mainNav");
+
+    if (menuToggle && mainNav) {
+        menuToggle.addEventListener("click", () => {
+            const isExpanded =
+                menuToggle.getAttribute("aria-expanded") === "true";
+            menuToggle.setAttribute("aria-expanded", String(!isExpanded));
+            mainNav.setAttribute("aria-hidden", String(isExpanded));
+            mainNav.classList.toggle("hidden");
+        });
+
+        // Fermer le menu quand on clique sur un lien
+        const menuLinks = mainNav.querySelectorAll("a");
+        menuLinks.forEach((link) => {
+            link.addEventListener("click", () => {
+                menuToggle.setAttribute("aria-expanded", "false");
+                mainNav.setAttribute("aria-hidden", "true");
+                mainNav.classList.add("hidden");
+            });
+        });
+    }
+</script>

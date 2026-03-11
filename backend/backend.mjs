@@ -1,5 +1,6 @@
 import PocketBase from "pocketbase";
 const pb = new PocketBase('http://127.0.0.1:8090');
+export {pb};
 
 export async function AllArtiste() {
     const records = await pb.collection("artiste").getFullList({
@@ -61,4 +62,21 @@ export async function AjoutModif(collection, data, id = null) {
         const record = await pb.collection(collection).create(data);
         return record;
     }
+}
+
+/*3. Dev*/
+/**
+ * Récupère l'URL d'une image depuis PocketBase
+ * @param {Object} record - Le record contenant l'image
+ * @param {string} imageField - Le champ du record contenant le nom du fichier
+ * @returns {string|null} L'URL de l'image ou null si le fichier n'existe pas
+ */
+export function getImageUrl(record, imageField) {
+    if (!record[imageField]) return null;
+    return pb.files.getURL(record, record[imageField]);
+}
+
+export async function getArtisteById(id) {
+    const record = await pb.collection("artiste").getOne(id);
+    return record;
 }

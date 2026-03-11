@@ -1,1 +1,66 @@
 @import "tailwindcss";
+
+@theme {
+    --color-bleu-ciel: oklch(64.03% 0.099 211.69);
+}
+
+:root {
+    --color-primary: #0a1e3d;
+    --color-text: #ffffff;
+    --color-base: #f0f0f0;
+    --color-detail: #ffd700;
+    --text-s: 0.875rem;
+    --text-m: 1rem;
+    --text-l: 1.25rem;
+    --text-2xl: 1.5rem;
+    --text-3xl: 1.875rem;
+    --space-basic: 1rem;
+    --space-menu: 1.5rem;
+    --space-special: 2rem;
+    --font-title: "Poppins", sans-serif;
+    --font-body: "Inter", sans-serif;
+}
+
+/* CTA Styles */
+.cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 2rem;
+    background-color: var(--color-detail);
+    color: var(--color-primary);
+    border-radius: 9999px;
+    font-family: var(--font-title);
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+.cta:hover {
+    background-color: white;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transform: scale(1.05);
+}
+
+.cta__ticket,
+.cta__prog {
+    font-size: clamp(0.875rem, 2vw, 1.125rem);
+}
+
+/* Responsive utilities */
+@media (max-width: 640px) {
+    .cta {
+        padding: 0.625rem 1.5rem;
+        font-size: 0.875rem;
+    }
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Ensure images are responsive */
+img {
+    max-width: 100%;
+    height: auto;
+}

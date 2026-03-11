@@ -1,0 +1,146 @@
+---
+// src/pages/about/index.astro - Page à propos du festival
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Notre Festival - Fanfa'Contoise">
+    <!-- Section héro -->
+    <section class="bg-primary-blue py-8 md:py-12 lg:py-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
+            <h1
+                class="font-title font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center mb-3 md:mb-4"
+            >
+                Notre Festival
+            </h1>
+            <p
+                class="text-center text-sm sm:text-base md:text-lg text-detail font-special"
+            >
+                La Fanfa'Comtoise : le festival qui fait vibrer Montbéliard !
+            </p>
+        </div>
+    </section>
+
+    <!-- Section introduction -->
+    <section class="bg-primary-blue py-8 md:py-12 lg:py-16">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 md:px-8">
+            <h2
+                class="font-title font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl text-center mb-8 md:mb-12 text-detail"
+            >
+                C'est quoi la Fanfa'Comtoise ?
+            </h2>
+            <div
+                class="space-y-4 md:space-y-6 text-sm md:text-base lg:text-lg leading-relaxed text-white"
+            >
+                <p>
+                    La <span class="text-detail font-bold">Fanfa'Comtoise</span
+                    >, c'est le rendez-vous musical gratuit au cœur de
+                    Montbéliard. Chaque année, le centre-ville gambade au rythme
+                    des cuivres, des percussions et du jazz, dans une ambiance
+                    aussi chaleureuse que festive.
+                </p>
+                <p>
+                    Au programme : de la musique variée, des artistes talentueux
+                    qui se donnent en fête, le tout pulsé au rythme des cuivres
+                    !
+                </p>
+                <p>
+                    Un soul objectif : rassembler, faire vibrer et partager en
+                    musique, sur un tempo résolument groovy et convivial.
+                </p>
+                <p>Rejoignez nous pour une expérience musicale inoubliable !</p>
+            </div>
+
+            <!-- CTA -->
+            <div class="flex justify-center mt-8 md:mt-12">
+                <a
+                    href="#"
+                    class="cta inline-flex items-center gap-2 text-sm sm:text-base md:text-lg"
+                >
+                    <span>Accéder à la billetterie</span>
+                    <img
+                        src="/assets/icons/arrow/icon_cta_billet.svg"
+                        alt=""
+                        class="w-4 h-4 md:w-5 md:h-5"
+                    />
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section objectifs -->
+    <section class="bg-primary-blue py-8 md:py-12 lg:py-16">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 md:px-8">
+            <h2
+                class="font-title font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl text-center mb-8 md:mb-12 text-detail"
+            >
+                Nos objectifs
+            </h2>
+            <ul
+                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
+            >
+                <li
+                    class="bg-white bg-opacity-5 p-4 md:p-6 rounded-lg border-l-4 border-detail"
+                >
+                    <p
+                        class="font-title font-bold text-blue-400 text-sm md:text-base lg:text-lg"
+                    >
+                        Créer un événement fédérateur et durable
+                    </p>
+                </li>
+                <li
+                    class="bg-white bg-opacity-5 p-4 md:p-6 rounded-lg border-l-4 border-detail"
+                >
+                    <p
+                        class="font-title font-bold text-blue-400 text-sm md:text-base lg:text-lg"
+                    >
+                        Mettre en valeur la scène musicale régionale
+                    </p>
+                </li>
+                <li
+                    class="bg-white bg-opacity-5 p-4 md:p-6 rounded-lg border-l-4 border-detail"
+                >
+                    <p
+                        class="font-title font-bold text-blue-400 text-sm md:text-base lg:text-lg"
+                    >
+                        Dynamiser le centre-ville par la culture
+                    </p>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Section histoire -->
+    <section class="bg-primary-blue py-8 md:py-12 lg:py-16">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 md:px-8">
+            <h2
+                class="font-title font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl text-center mb-8 md:mb-12 text-detail"
+            >
+                L'histoire de notre festival
+            </h2>
+            <div
+                class="space-y-4 md:space-y-6 text-sm md:text-base lg:text-lg leading-relaxed text-white"
+            >
+                <p>
+                    Tout a commencé en 2024, autour d'une simple idée : offrir à
+                    Montbéliard un nouveau rendez-vous dédié au jazz vivant.
+                    Quelques passionnés se sont retrouvés dans un café du
+                    centre-ville, rêvant d'un moment où les rues vibreraient au
+                    son des saxophones, où la ville deviendrait un terrain de
+                    rencontre entre artistes, habitants et curieux.
+                </p>
+                <p>
+                    De cette envie commune est née notre festival, un festival
+                    imaginé comme une aventure collective. Après des mois de
+                    discussions, de projets et d'enthousiasme partagé, la
+                    première édition voit enfin le jour en 2025.
+                </p>
+                <p>
+                    Aujourd'hui, la Fanfa'Comtoise porte cette même ambition :
+                    faire découvrir le jazz autrement, créer des instants
+                    uniques et écrire, année après année, une histoire musicale
+                    qui appartient à tous.
+                </p>
+            </div>
+        </div>
+    </section>
+</Layout>

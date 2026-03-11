@@ -1,0 +1,120 @@
+---
+// src/pages/artiste/[id].astro - Page détail d'un artiste
+import Layout from "../../layouts/Layout.astro";
+import { AllArtiste } from "../../../backend/backend.mjs";
+const artiste = await AllArtiste();
+
+export async function getStaticPaths() {
+    return Object.keys(artiste).map((id) => ({
+        params: { id },
+        props: { artiste: artiste[id] },
+    }));
+}
+
+interface Props {
+    artiste: (typeof artiste)[keyof typeof artiste];
+}
+
+const { id } = Astro.params;
+const artist = Astro.props.artiste;
+
+if (!artist) {
+    return Astro.response.write("Artiste non trouvé");
+}
+---
+
+<Layout title={`${artist.nom} - Fanfa'Contoise`}>
+    <!-- Section en-tête -->
+    <section class="bg-primary-blue py-8 md:py-12 lg:py-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
+            <a
+                href="/artiste"
+                class="inline-flex items-center gap-2 text-detail hover:text-white transition-colors mb-4 md:mb-6 text-sm md:text-base"
+            >
+                <img
+                    src="/assets/icons/arrow/icon_flecheG.svg"
+                    alt="retour"
+                    class="w-4 h-4 md:w-5 md:h-5"
+                />
+                <span>Retour</span>
+            </a>
+            <h1
+                class="font-title font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-3 md:mb-4"
+            >
+                {artist.nom}
+            </h1>
+            <p class="text-sm sm:text-base md:text-lg text-detail font-special">
+                {artist.date_representation}<br />
+                Sur la scène {artist.scenes}
+            </p>
+        </div>
+    </section>
+
+    <!-- Section description -->
+    <section class="bg-primary-blue py-8 md:py-12 lg:py-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
+            <div
+                class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-start"
+            >
+                <!-- Image -->
+                <div class="flex justify-center">
+                    <img
+                        src={artist.photo_principale}
+                        alt={artist.nom}
+                        class="rounded-2xl max-w-sm md:max-w-md w-full h-auto object-cover shadow-xl"
+                    />
+                </div>
+
+                <!-- Contenu -->
+                <div class="space-y-4 md:space-y-6">
+                    <div>
+                        <h3
+                            class="font-title font-bold text-detail text-base md:text-lg mb-2"
+                        >
+                            À propos
+                        </h3>
+                        <p
+                            class="text-white text-sm md:text-base leading-relaxed"
+                        >
+                            {artist.description}
+                        </p>
+                    </div>
+
+                    <div>
+                        <h3
+                            class="font-title font-bold text-detail text-sm md:text-base lg:text-lg mb-2"
+                        >
+                            Scène de performance
+                        </h3>
+                        <p class="text-white text-sm md:text-base">
+                            Scène {artist.scene}
+                        </p>
+                    </div>
+
+                    <div>
+                        <h3
+                            class="font-title font-bold text-detail text-sm md:text-base lg:text-lg mb-2"
+                        >
+                            Date du concert
+                        </h3>
+                        <p class="text-white text-sm md:text-base">
+                            {artist.date_representation}
+                        </p>
+                    </div>
+
+                    <a
+                        href="#"
+                        class="cta inline-flex items-center gap-2 text-sm md:text-base lg:text-lg"
+                    >
+                        <span>Réserver une place</span>
+                        <img
+                            src="/assets/icons/arrow/icon_cta_billet.svg"
+                            alt=""
+                            class="w-4 h-4 md:w-5 md:h-5"
+                        />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</Layout>
